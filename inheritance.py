@@ -41,26 +41,41 @@
 # print(car1.fuel_type)
 
 
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
 
-class person:
-    def __init__(self,name,age):
-        self.name=name
-        self.age=age
-class student(person):
-    def __init__(self,name,age,student_id):
-        self.student_id=student_id
-        super().__init__(name, age)   
-class teacher(person):
-        def __init__(self, name, age,student_id,subject):
-             self.subject=subject
-             super().__init__(name, age,student_id)            
-class teacher_assistant(student,teacher):
-     def __init__(self,name,age,student_id,subject):
-          super().__init__(name,age,student_id,subject)
-assistant1=teacher_assistant("sam",29,"uk2509s22","computer")
-print("the name :",assistant1.name)
-print("the age is:",assistant1.age)
-print("the student_id is :",assistant1.student_id)
-print("the subject is :",assistant1.subject)
+class Student(Person):
+    def __init__(self, name, age, student_id):
+        super().__init__(name, age)
+        self.student_id = student_id
+
+class Teacher(Person):
+    def __init__(self, name, age, subject):
+        super().__init__(name, age)
+        self.subject = subject
+
+class TeachingAssistant(Student, Teacher):
+    def __init__(self, name, age, student_id, subject):
+        
+        Student.__init__(self, name, age, student_id)
+        
+        Teacher.__init__(self, name, age, subject)
+
+    def show_details(self):
+        print("Name:", self.name)
+        print("Age:", self.age)
+        print("Student ID:", self.student_id)
+        print("Subject:", self.subject)
+
+
+ta1 = TeachingAssistant("Alex", 24, "ST1023", "ComputerScience")
+
+
+ta1.show_details()
+
+
+
 
 
